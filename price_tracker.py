@@ -1,15 +1,15 @@
 import random
-
+from database import Database as db
 
 class PriceTracker:
-    def __init__(self, db):
-        self.db = db
+    def __init__(self):
+        pass
 
-    async def check_prices(self):
-        products = await self.db.get_all_products()
+    async def check_prices():
+        products = await db.get_all_products()
         changes = []
         for product in products:
-            new_price = self.get_price(product['url'])
+            new_price = random.randint(900, 1100)
             if new_price is not None and new_price != product['price']:
                 change_percent = (
                     round(((new_price - product['price']) / product['price']) * 100, 2) 
@@ -22,9 +22,9 @@ class PriceTracker:
                     'new_price': new_price,
                     'change_percent': change_percent
                 })
-                await self.db.update_price(product['id'], new_price)
+                await db.update_price(product['id'], new_price)
         return changes
 
-    def get_price(self, url):
-        # Заглушка для парсинга цен. Замените это на настоящий парсер.
-        return random.randint(900, 1100)
+    # def get_price(self, url):
+    #     # Заглушка для парсинга цен. Замените это на настоящий парсер.
+    #     return random.randint(900, 1100)
