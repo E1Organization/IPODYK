@@ -7,7 +7,7 @@ from database import Database
 from price_tracker import PriceTracker
 
 # Ваш токен Telegram-бота
-TOKEN = "YOUR_TELEGRAM_BOT_TOKEN"
+TOKEN = "7648782067:AAEDXelkWKzNj4nJQRcBAKSWBTnlpsqgNKY"
 
 # Инициализация бота и диспетчера
 bot = Bot(token=TOKEN, parse_mode="HTML")
