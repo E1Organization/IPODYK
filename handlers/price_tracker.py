@@ -1,11 +1,12 @@
 import random
-from database import Database as db
+from data.database import Database
+db = Database("data/products.db")
 
 class PriceTracker:
     def __init__(self):
         pass
 
-    async def check_prices():
+    async def check_prices(self, user_id):
         products = await db.get_all_products()
         changes = []
         for product in products:
@@ -22,7 +23,7 @@ class PriceTracker:
                     'new_price': new_price,
                     'change_percent': change_percent
                 })
-                await db.update_price(product['id'], new_price)
+                await db.update_price(product['id'], new_price, user_id)
         return changes
 
     # def get_price(self, url):
