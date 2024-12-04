@@ -1,4 +1,5 @@
 import asyncio
+import logging
 from bot import bot
 
 from aiogram import Router
@@ -145,8 +146,10 @@ async def notify_price_changes():
                 message = (
                     f"⚠️ Цена на товар изменилась!\n"
                     f"{hbold('Товар')}: {change['url']}\n"
-                    f"Старая цена: {hbold(change['old_price'])} ₽, Новая цена: {hbold(change['new_price'])} ₽\n"
+                    f"Старая цена: {hbold(f'{change['old_price']:.2f}')} BYN, "
+                    f"Новая цена: {hbold(f'{change['new_price']:.2f}')} BYN\n"
                     f"Изменение: {hbold(change['change_percent'])}%"
                 )
                 await bot.send_message(user_id, message)
-        await asyncio.sleep(3600)  # Проверять каждый час
+        await asyncio.sleep(3)  # Интервал проверки
+
